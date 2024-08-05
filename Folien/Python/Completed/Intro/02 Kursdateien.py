@@ -39,7 +39,7 @@
 #
 # ## JupyterHub
 #
-# - [Coding-Academy JupyterHub](https://jh1.mhoezl.de/)
+# - [Coding-Academy JupyterHub](https://jh1.mhoelzl.de/)
 # - Login mit dem Namen aus Ihrer Email (vor dem `@`) in Kleinbuchstaben
 # - Beim ersten Login können Sie ein Passwort festlegen
 # - Bitte merken Sie sich dieses Passwort, Sie können es nicht selber
