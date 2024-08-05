@@ -157,7 +157,7 @@ def test_random_bad():
 
 
 # %%
-test_random_bad()
+# test_random_bad()
 
 # %%
 def test_random_better():
@@ -168,7 +168,7 @@ def test_random_better():
     print("Success!")
 
 # %%
-test_random_better()
+# test_random_better()
 
 # %%
 import time
@@ -183,7 +183,7 @@ def test_date_bad():
     print("Success!")
 
 # %%
-test_date_bad()
+# test_date_bad()
 
 # %%
 import datetime
@@ -197,9 +197,9 @@ def test_date_better():
     assert unit.tm_sec % 2 == 0
     print("Success!")
 
-# %%
-test_date_better()
 
+# %%
+# test_date_better()
 
 # %% [markdown]
 #
