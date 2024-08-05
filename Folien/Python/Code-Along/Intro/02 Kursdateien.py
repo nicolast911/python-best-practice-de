@@ -12,8 +12,8 @@
 # ## GitHub
 #
 # - [GitHub Seite](https://github.com/Coding-Academy-Munich/python-clean-code-de)
-# - [Git Repository]()
-# - [Zip-Archiv]()
+# - [Git Repository](https://github.com/Coding-Academy-Munich/python-clean-code-de.git)
+# - [Zip-Archiv](https://github.com/Coding-Academy-Munich/python-clean-code-de/archive/refs/heads/master.zip)
 
 # %% [markdown]
 #
@@ -32,7 +32,7 @@
 #
 # ## Herunterladen und Entpacken des Zip-Archivs
 #
-# - [Zip-Archiv]()
+# - [Zip-Archiv](https://github.com/Coding-Academy-Munich/python-clean-code-de/archive/refs/heads/master.zip)
 # - Entpacken Sie das Zip-Archiv, bevor Sie mit den Dateien arbeiten
 
 # %% [markdown]
@@ -44,7 +44,7 @@
 # - Beim ersten Login können Sie ein Passwort festlegen
 # - Bitte merken Sie sich dieses Passwort, Sie können es nicht selber
 #   zurücksetzen oder ändern
-# - Kursmaterial: [GitPuller Link]()
+# - Kursmaterial: [GitPuller Link](https://jh1.mhoelzl.de/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FCoding-Academy-Munich%2Fpython-clean-code-de&urlpath=lab%2Ftree%2Fpython-clean-code-de%2FFolien%2FNotebooks%2FCode-Along%2FIntro%2F01+Herzlich+Willkommen.ipynb&branch=master)
 
 # %% [markdown]
 #
