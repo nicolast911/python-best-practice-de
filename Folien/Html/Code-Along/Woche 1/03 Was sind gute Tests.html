@@ -13180,7 +13180,7 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=9d86bb00a2253748">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=9d86bb00a2253748">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
@@ -13272,12 +13272,20 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=4d485b61d77ce016">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=4d485b61d77ce016">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_order_output</span><span class="p">():</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s2">"Apple"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s2">"Banana"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Order(Item(Apple, 1.0), Item(Banana, 2.0)), total = 3.0"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Success."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
