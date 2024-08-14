@@ -335,8 +335,8 @@ room1["north"]
 #
 # - Kopplung gibt an, wie stark die Abhängigkeiten zwischen zwei Artefakten
 #   sind (Funktionen, Klassen, Module, ...)
-# - Es gibt [viele verschiedene
-#   Arten](https://en.wikipedia.org/wiki/Coupling_(computer_programming)#Types_of_coupling)
+# - Es gibt <a href="https://de.wikipedia.org/wiki/Kopplung_(Softwareentwicklung)#Arten_der_Kopplung">
+#   viele verschiedene Arten</a>
 #   von Kopplung
 # - Enge Kopplung
 #   - Verhindert, dass wir Teile des Systems unabhängig voneinander verstehen
