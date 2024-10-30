@@ -37,7 +37,7 @@
 
 # %% [markdown]
 #
-# <img src="img/PlantUML/adapter-example.svg"
+# <img src="img/adapter-example.png"
 #      style="display:block;margin:auto;width:80%"/>
 
 # %% [markdown]
@@ -55,7 +55,7 @@
 # - Klassenadapter verwenden Mehrfachvererbung und werden seltener eingesetzt
 # - Klassendiagramm für Objektadapter:
 #
-# <img src="img/PlantUML/pat_adapter.svg"
+# <img src="img/pat_adapter.png"
 #      style="display: block; margin: auto; width: 80%;"/>
 
 # %% [markdown]

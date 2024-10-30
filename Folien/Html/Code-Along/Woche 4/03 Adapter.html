@@ -13183,10 +13183,10 @@ Schnittstelle unseres Editors anpassen</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=86b984f43a05e8e3"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=39c7b56248a97a45"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="No description has been provided for this image" src="img/PlantUML/adapter-example.svg" style="display:block;margin:auto;width:80%"/></p>
+<p><img alt="No description has been provided for this image" src="img/adapter-example.png" style="display:block;margin:auto;width:80%"/></p>
 </div>
 </div>
 </div>
@@ -13200,7 +13200,7 @@ Schnittstelle unseres Editors anpassen</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=26403fe0f9bf8e84"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=4d9d457e4ec2b195"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Struktur">Struktur<a class="anchor-link" href="#Struktur">¶</a></h2><ul>
@@ -13208,7 +13208,7 @@ Schnittstelle unseres Editors anpassen</li>
 <li>Klassenadapter verwenden Mehrfachvererbung und werden seltener eingesetzt</li>
 <li>Klassendiagramm für Objektadapter:</li>
 </ul>
-<p><img alt="No description has been provided for this image" src="img/PlantUML/pat_adapter.svg" style="display: block; margin: auto; width: 80%;"/></p>
+<p><img alt="No description has been provided for this image" src="img/pat_adapter.png" style="display: block; margin: auto; width: 80%;"/></p>
 </div>
 </div>
 </div>
@@ -13290,45 +13290,63 @@ Schnittstelle unseres Editors anpassen</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=16b82b5158fda9cc">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=16b82b5158fda9cc">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d717ed80a9eecc29">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=d717ed80a9eecc29">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="o">...</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">salary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="o">...</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ff3aae40e6fbcbd4">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=ff3aae40e6fbcbd4">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Company</span><span class="p">:</span>
+    <span class="n">employees</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Employee</span><span class="p">]</span>
+    <span class="n">monthly_rent</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1000.0</span>
+
+    <span class="k">def</span> <span class="nf">monthly_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">employee</span><span class="o">.</span><span class="n">salary</span><span class="p">()</span> <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">monthly_rent</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=4fbce93e85359c50">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=4fbce93e85359c50">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">LegacyEmployee</span><span class="p">:</span>
+    <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">pay</span><span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 </div>

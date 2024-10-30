@@ -107,7 +107,7 @@ for i in range(10):
 #
 # ### Klassendiagramm mit Observer
 #
-# <img src="img/stock_example.svg"
+# <img src="img/stock_example.png"
 #      style="display:block;margin:auto;width:90%"/>
 
 # %%
@@ -223,7 +223,7 @@ for i in range(10):
 # %% [markdown]
 # ### Struktur: Pull Observer
 #
-# <img src="img/pat_observer_pull.svg"
+# <img src="img/pat_observer_pull.png"
 #      style="display:block;margin:auto;width:100%"/>
 
 
@@ -256,7 +256,7 @@ for i in range(10):
 # %% [markdown]
 # ### Interaktionen: Pull Observer
 #
-# <img src="img/pat_observer_pull_seq.svg"
+# <img src="img/pat_observer_pull_seq.png"
 #      style="display:block;margin:auto;width:65%"/>
 
 
@@ -274,13 +274,13 @@ for i in range(10):
 # %% [markdown]
 # ### Struktur: Push Observer
 #
-# <img src="img/pat_observer_push.svg"
+# <img src="img/pat_observer_push.png"
 #      style="display:block;margin:auto;width:100%"/>
 
 # %% [markdown]
 # ### Interaktion: Push Observer
 #
-# <img src="img/pat_observer_push_seq.svg"
+# <img src="img/pat_observer_push_seq.png"
 #      style="display:block;margin:auto;width:65%"/>
 
 # %% [markdown]
