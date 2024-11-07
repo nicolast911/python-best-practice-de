@@ -92,7 +92,7 @@ thing.get_them()
 UNFLAGGED = 0
 FLAGGED = 1
 
-
+# %%
 @dataclass
 class MineSweeper:  # type: ignore
     board: list
