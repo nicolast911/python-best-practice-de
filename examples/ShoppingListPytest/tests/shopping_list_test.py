@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 
 from shopping_list_pytest.shopping_list import ShoppingList, ShoppingListItem
 
