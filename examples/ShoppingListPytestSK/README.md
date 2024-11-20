@@ -19,7 +19,7 @@ in the root directory (i.e., the directory where `pyproject.toml` and
 
 After building the package you can install it with pip:
 ```shell script
-pip install dist/shopping_list_pytest-0.0.2-py3-none-any.whl
+pip install dist/shopping_list_pytest_sk-0.0.2-py3-none-any.whl
 ```
 
 To install the package so that it can be used for development purposes

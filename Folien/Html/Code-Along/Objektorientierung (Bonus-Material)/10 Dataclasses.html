@@ -13086,7 +13086,7 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=6e9b91a6f35ae38a"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=3ade1f5bd92568f5"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img alt="Python Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
@@ -13136,7 +13136,7 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 " style="display:block;margin:auto;width:10%"/>
 <br/></p>
 <div style="text-align:center; font-size:200%;">
-<b>Clean Code: Funktionen (Teil 1)</b>
+<b>Dataclasses</b>
 </div>
 <br>
 <div style="text-align:center;">Dr. Matthias Hölzl</div>
@@ -13144,740 +13144,1048 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </br></div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=037d049fce81e05a"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=8ebf0a1bc8d32191"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Clean-Code:-Funktionen">Clean Code: Funktionen<a class="anchor-link" href="#Clean-Code:-Funktionen">¶</a></h1><p>Fasse Operationen, die logisch zusammengehören, als sorgfältig benannte
-Funktionen zusammen</p>
 <ul>
-<li>Besser lesbar</li>
-<li>Einfacher zu testen</li>
-<li>Wird eher wiederverwendet</li>
-<li>Fehler sind weniger wahrscheinlich</li>
+<li>Definition von Klassen ist in Python recht einfach</li>
+<li>Benötigt aber relativ viel Boilerplate-Code, um eine Klasse mit gutem Verhalten
+zu definieren</li>
+<li>Attribute sind in <code>__init__()</code> versteckt</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=434fea343edae7d1"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Die-1.-Clean-Code-Regel-f%C3%BCr-Funktionen">Die 1. Clean Code Regel für Funktionen<a class="anchor-link" href="#Die-1.-Clean-Code-Regel-f%C3%BCr-Funktionen">¶</a></h2><ul>
-<li>Funktionen sollten kurz sein</li>
-<li>Kürzer als man meint!</li>
-<li>Maximal 4 Zeilen!</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=766bb046cdaafc9f"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Weniger-strikte-Regeln">Weniger strikte Regeln<a class="anchor-link" href="#Weniger-strikte-Regeln">¶</a></h2><p>(Aus den C++ Core Guidelines)</p>
-<ul>
-<li>Funktionen sollten auf einen Bildschirm passen</li>
-<li>Große Funktionen sollten in kleinere, zusammenhängende und benannte
-Funktionen aufgeteilt werden</li>
-<li>Funktionen mit einer bis fünf Zeilen sollten als normal angesehen werden</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2e0c4a65aec79aa1"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Konzentration-auf-eine-Aufgabe">Konzentration auf eine Aufgabe<a class="anchor-link" href="#Konzentration-auf-eine-Aufgabe">¶</a></h2><ul>
-<li>Funktionen sollten eine Aufgabe erfüllen ("do one thing")</li>
-<li>Sie sollten diese Aufgabe gut erfüllen</li>
-<li>Sie sollten nur diese Aufgabe erfüllen</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=71a58001aa86d8ea">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=452d460cbdbcb8e4">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-    <span class="c1"># Get measurement from sensors based on config data...</span>
-    <span class="n">measurement</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="c1"># ... and perform a complex computation</span>
-    <span class="n">new_result</span> <span class="o">=</span> <span class="n">measurement</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="c1"># ... save the result to the list of results</span>
-    <span class="k">if</span> <span class="n">new_result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_result</span><span class="p">)</span>
-    <span class="c1"># ... print all results</span>
-    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="c1"># ... and return the result</span>
-    <span class="k">return</span> <span class="n">new_result</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=e0945c6afb4f111b">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=bee83015e3b7c1ac">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_results</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">43</span><span class="p">]</span>
-<span class="n">new_result</span> <span class="o">=</span> <span class="n">do_stuff</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">all_results</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"new_result = </span><span class="si">{</span><span class="n">new_result</span><span class="si">}</span><span class="s2">, all_results = </span><span class="si">{</span><span class="n">all_results</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>12
-43
-7
-new_result = 7, all_results = [12, 43, 7]
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=bb542cb460ed2b80"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Wir können die Implementierung verbessern, indem wir die Funktion in mehrere
-Funktionen aufteilen, die jeweils eine Aufgabe erfüllen:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=e5a86f7b41d6d8b9">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_measurement</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=d234359c11743542">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4295784315214500">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_data_for_next_timestep</span><span class="p">(</span><span class="n">measurement</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">measurement</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=abbb536da20369a3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=823548503f1aca39">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">is_valid_result</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=1f62a1fc050f5e50">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=475516e22a323b66">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="n">new_result</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=af37a7ac4e05729a">
-<div class="input">
-<div class="prompt input_prompt">In [7]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=e162524f16b4bd0b"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Die resultierende Funktion ist besser:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=093c73ca5edb921f">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">perform_measurement_and_process_result</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-    <span class="n">measurement</span> <span class="o">=</span> <span class="n">get_measurement</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="n">new_result</span> <span class="o">=</span> <span class="n">compute_data_for_next_timestep</span><span class="p">(</span><span class="n">measurement</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">is_valid_result</span><span class="p">(</span><span class="n">new_result</span><span class="p">):</span>
-        <span class="n">save_result</span><span class="p">(</span><span class="n">new_result</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
-    <span class="n">print_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">new_result</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=7e6d50a03e3f92cf">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_results</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">43</span><span class="p">]</span>
-<span class="n">new_result</span> <span class="o">=</span> <span class="n">perform_measurement_and_process_result</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">all_results</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"new_result = </span><span class="si">{</span><span class="n">new_result</span><span class="si">}</span><span class="s2">, all_results = </span><span class="si">{</span><span class="n">all_results</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>12
-43
-7
-new_result = 7, all_results = [12, 43, 7]
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=e17ac103d888bd43"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fragen">Fragen<a class="anchor-link" href="#Fragen">¶</a></h3><ul>
-<li>Ist die Funktion <code>perform_measurement_and_process_result()</code> wirklich besser?</li>
-<li>Konzentriert sie sich auf eine Aufgabe?</li>
-<li>Unterscheiden sich Ihre Aufgaben von <code>do_stuff()</code>?</li>
-<li>Warum (nicht)?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=b8284cdf9e7fc77d"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Hilfsmittel:-%C3%84nderungsgr%C3%BCnde">Hilfsmittel: Änderungsgründe<a class="anchor-link" href="#Hilfsmittel:-%C3%84nderungsgr%C3%BCnde">¶</a></h2><ul>
-<li>Welche möglichen Änderungsgründe gibt es?</li>
-<li>Wie viele davon betreffen die jeweilige Funktion?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=33cee4aeb1fd1d35"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<table>
-<thead>
-<tr>
-<th>Änderungsgrund</th>
-<th style="text-align:left"><code>do_stuff()</code></th>
-<th style="text-align:left"><code>perform_measurement_and_process_result()</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Messung</td>
-<td style="text-align:left">✓</td>
-<td style="text-align:left">❌ <code>get_measurement()</code></td>
-</tr>
-<tr>
-<td>Berechnung</td>
-<td style="text-align:left">✓</td>
-<td style="text-align:left">❌ <code>compute_data_for_next_timestep()</code></td>
-</tr>
-<tr>
-<td>Speichern</td>
-<td style="text-align:left">✓</td>
-<td style="text-align:left">❌ <code>save_result()</code></td>
-</tr>
-<tr>
-<td>Drucken</td>
-<td style="text-align:left">✓</td>
-<td style="text-align:left">❌ <code>print_results()</code></td>
-</tr>
-<tr>
-<td>Neue/andere Tätigkeit</td>
-<td style="text-align:left">✓</td>
-<td style="text-align:left">✓</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=5a0831d91caaa4e0"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Abstraktionsebenen">Abstraktionsebenen<a class="anchor-link" href="#Abstraktionsebenen">¶</a></h1><ul>
-<li>Alles, was die Funktion in ihrem Rumpf tut, sollte eine (und nur eine)
-Abstraktionsebene unterhalb der Funktion selbst sein.</li>
-<li>Beispiel: <code>perform_measurement_and_process_result()</code></li>
-<li>Gegenbeispiel: <code>create_and_distribute_exam()</code>:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=343b54837fc75775">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_and_distribute_exam</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
-    <span class="c1"># high level abstraction</span>
-    <span class="n">exam</span> <span class="o">=</span> <span class="n">create_exam_using_chatgpt</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
 
-    <span class="c1"># low level abstraction</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2">_exam.pdf"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="c1"># Code to write the PDF header...</span>
-        <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">exam</span><span class="o">.</span><span class="n">questions</span><span class="p">:</span>
-            <span class="c1"># Code to convert the question to PDF...</span>
-            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Point(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">)"</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=a90eccaeda9739ee"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=a9af8bf52952963b">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=6e706282212167eb">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=e34a2fc6ec362d73">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">==</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=2dea5f6d0b399936"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kontrolle-der-Abstraktionsebenen:-%22Um-Zu%22-Abs%C3%A4tze">Kontrolle der Abstraktionsebenen: "Um-Zu"-Absätze<a class="anchor-link" href="#Kontrolle-der-Abstraktionsebenen:-%22Um-Zu%22-Abs%C3%A4tze">¶</a></h2><p><code>perform_measurement_and_process_result()</code>:</p>
-<p>Um eine Messung durchzuführen und das Ergebnis zu verarbeiten:</p>
+<h2 id="Dataclasses">Dataclasses<a class="anchor-link" href="#Dataclasses">¶</a></h2><ul>
+<li>Attribute besser sichtbar</li>
+<li><code>__repr__()</code> und <code>__eq__()</code> sind vordefiniert</li>
+<li>Weitere Möglichkeiten: Siehe
+<a href="https://docs.python.org/3/library/dataclasses.html">Dokumentation</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=3f5203df18900b5a">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3451e58b35db8f01">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=76cd43a020804d44">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2f8a1afcec0f7c8d">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=26c120199888dbdb">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=101fe059687c11dd">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5c2ada63eadfc7cc"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Hole ein Messergebnis</li>
-<li>Berechne die Daten für den nächsten Zeitschritt</li>
-<li>Speichere das Ergebnis, falls es gültig ist</li>
-<li>Drucke alle Ergebnisse, unabhängig davon, ob das neue Ergebnis gültig ist</li>
+<li>Dataclasses sind vollwertige Klassen</li>
+<li>Sie können Methoden enthalten</li>
+<li>Attribute können Default-Werte haben</li>
+<li>Sie können vererbt werden</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=e9404e688f178c5a"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kommentare-als-%22Um-Zu%22-Abs%C3%A4tze">Kommentare als "Um-Zu"-Absätze<a class="anchor-link" href="#Kommentare-als-%22Um-Zu%22-Abs%C3%A4tze">¶</a></h2><ul>
-<li>Beim Schreiben von Code können wir das "Um-Zu"-Muster verwenden, um die
-Abstraktionsebenen zu kontrollieren</li>
-<li>Wir können die "Um-Zu"-Absätze als Kommentare schreiben bevor wir den Code
-schreiben</li>
-<li>Meistens wird jeder Absatz zu einer Funktion</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=c1d4b7d4efc7fd31">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=c94e9cd5a1716b7e">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_order</span><span class="p">(</span><span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-    <span class="c1"># Hole die Bestelldetails anhand der `order_id`</span>
-    <span class="c1"># Validiere die Lagerverfügbarkeit für jeden Artikel in der Bestellung</span>
-    <span class="c1"># Aktualisiere den Lagerbestand bei erfolgreicher Validierung</span>
-    <span class="c1"># Erzeuge eine Lieferung für die Bestellung</span>
-    <span class="c1"># Benachrichtige den Kunden mit den Lieferdetails</span>
-    <span class="k">pass</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=0b15c37f2d02fbc2"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Funktionen-als-%22Um-Zu%22-Abs%C3%A4tze">Funktionen als "Um-Zu"-Absätze<a class="anchor-link" href="#Funktionen-als-%22Um-Zu%22-Abs%C3%A4tze">¶</a></h2><p>Wir können die "Um-Zu"-Absätze auch gleich als Funktionsaufrufe schreiben:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=a8f7bc9e4f7d6d74">
+<div class="cell border-box-sizing code_cell rendered celltag_start" id="cell-id=3bef8c59247d416e">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_user_registration</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">validate_user_data</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">create_new_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
-    <span class="n">send_confirmation_email</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-    <span class="n">log_successful_registration</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Point3D</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">z</span><span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=702f82f566892aff"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=160a8cf57f60ac35">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=136810fb40a38751">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f69dcfd8817edc88"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Die-Step-Down-Regel">Die Step-Down-Regel<a class="anchor-link" href="#Die-Step-Down-Regel">¶</a></h2><ul>
-<li>Wir wollen, dass sich der Code wie eine Erzählung von oben nach unten liest</li>
-<li>Auf jede Funktion sollten die Funktionen eine Abstraktionsebene darunter
-folgen</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=f87689c78e484a09"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Mini-Workshop:-Do-one-Thing">Mini-Workshop: Do one Thing<a class="anchor-link" href="#Mini-Workshop:-Do-one-Thing">¶</a></h2><p>Die Funktion <code>handle_money_stuff()</code> macht mehr als eine Sache.</p>
-<p>Teilen Sie sie in mehrere Funktionen auf, so dass jede nur eine Sache tut.
-Stellen Sie sicher, dass</p>
 <ul>
-<li>jede Funktion ihre Aufgabe gut erfüllt und sich auf einer einzigen
-Abstraktionsebene befindet,</li>
-<li>alle Namen angemessen sind, und</li>
-<li>der Code leicht zu verstehen ist.</li>
+<li>Dataclasses erzwingen, dass Default-Werte unveränderlich sind<ul>
+<li>zumindest für einige Typen ...</li>
 </ul>
-<p><em>Tipp:</em> Beginnen Sie damit, die Variablen gemäß den Kommentaren umzubenennen,
-um den Rest der Arbeit zu vereinfachen.</p>
+</li>
+<li>Statt ein veränderliches Objekt als Default-Wert zu übergeben, kann eine
+Funktion verwendet werden, die ein neues Objekt zurückgibt</li>
+<li>Diese Art von Funktion wird "Factory-Funktion" genannt</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=e210a4fd483dae34">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=f823aff44b82c0d7">
 <div class="input">
-<div class="prompt input_prompt">In [13]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Name der Wochentage</span>
-<span class="n">lst_dns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Mon"</span><span class="p">,</span> <span class="s2">"Tue"</span><span class="p">,</span> <span class="s2">"Wed"</span><span class="p">,</span> <span class="s2">"Thu"</span><span class="p">,</span> <span class="s2">"Fri"</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>  <span class="c1"># noqa</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord</span> <span class="o">=</span> <span class="n">coord</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Point(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coord</span><span class="si">}</span><span class="s2">)"</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dy</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=793a6b04bfcb6216"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=d163986977448f96">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
+<span class="n">p1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=9aed961c57b1d6ca">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
+<span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=95e95952432f6520">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">p1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=0c0cd14bd7efab9f">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=873d1bd38e141783">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d5b7e6045d2a0f73">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f38be2b4b14af11f">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2ef245dda56aa727">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=193d8e0c5a07b532"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Die Funktion <code>handle_money_stuff()</code> hat folgende Parameter:</p>
 <ul>
-<li>den Wochentag (<code>i_dow</code>, day of week),</li>
-<li>das Gehalt pro Tag (<code>f_spd</code>, salary per day),</li>
-<li>den Namen des Angestellten (<code>str_n</code>, name) und</li>
-<li>einen Liste der bisher gezahlten Gehälter (<code>lst_slrs</code>, salaries).</li>
+<li>Für Listen brauchen wir keine Factory-Funktion definieren</li>
+<li>Der Listen-Konstruktor <code>list()</code> leistet das gleiche</li>
 </ul>
-<p>Das neue Gehalt wird an die Liste <code>lst_slrs</code> angehängt.</p>
-<p>Die Funktion gibt die zu zahlende Steuer zurück.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=ee7c1e07ec9c07a1">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1088b591162bdba4">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">handle_money_stuff</span><span class="p">(</span><span class="n">i_dow</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f_spd</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">str_n</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lst_slrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
-    <span class="c1"># Get the day of week from the list of days.</span>
-    <span class="c1"># We count Sunday as 1, Monday as 2, etc. but the work week starts on Monday.</span>
-    <span class="n">str_dow</span> <span class="o">=</span> <span class="n">lst_dns</span><span class="p">[</span><span class="n">i_dow</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="c1"># Compute the salary so far based on the day</span>
-    <span class="n">f_ssf</span> <span class="o">=</span> <span class="p">(</span><span class="n">i_dow</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">f_spd</span>
-    <span class="c1"># The tax</span>
-    <span class="n">f_t</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">if</span> <span class="n">f_ssf</span> <span class="o">&gt;</span> <span class="mf">500.0</span> <span class="ow">and</span> <span class="n">f_ssf</span> <span class="o">&lt;=</span> <span class="mf">1000.0</span><span class="p">:</span>
-        <span class="n">f_t</span> <span class="o">=</span> <span class="n">f_ssf</span> <span class="o">*</span> <span class="mf">0.05</span>
-    <span class="k">elif</span> <span class="n">f_ssf</span> <span class="o">&gt;</span> <span class="mf">1000.0</span> <span class="ow">and</span> <span class="n">f_ssf</span> <span class="o">&lt;=</span> <span class="mf">2000.0</span><span class="p">:</span>
-        <span class="n">f_t</span> <span class="o">=</span> <span class="n">f_ssf</span> <span class="o">*</span> <span class="mf">0.1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">f_t</span> <span class="o">=</span> <span class="n">f_ssf</span> <span class="o">*</span> <span class="mf">0.15</span>
-    <span class="c1"># Update salary based on the tax to pay</span>
-    <span class="n">f_ssf</span> <span class="o">=</span> <span class="n">f_ssf</span> <span class="o">-</span> <span class="n">f_t</span>
-    <span class="c1"># Add the salary to the list of all salaries paid</span>
-    <span class="n">lst_slrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_ssf</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">str_n</span><span class="si">}</span><span class="s2"> worked till </span><span class="si">{</span><span class="n">str_dow</span><span class="si">}</span><span class="s2"> and earned $</span><span class="si">{</span><span class="n">f_ssf</span><span class="si">}</span><span class="s2"> this week."</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Their taxes were $</span><span class="si">{</span><span class="n">f_t</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">f_t</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=35e2816d76f409c1">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5fc1ece4ccb2f255">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">_salaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">]</span>
-<span class="n">_result</span> <span class="o">=</span> <span class="n">handle_money_stuff</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"Joe"</span><span class="p">,</span> <span class="n">_salaries</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Joe worked till Thu and earned $570.0 this week.
-Their taxes were $30.0.
-30.0
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=2969ce02d3d9e9f9">
-<div class="input">
-<div class="prompt input_prompt">In [16]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">_salaries</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="mi">570</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">_result</span> <span class="o">==</span> <span class="mi">30</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_alt" id="cell-id=31fbc8939634e658">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cfd9042198b0443e">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">day_of_week_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Mon"</span><span class="p">,</span> <span class="s2">"Tue"</span><span class="p">,</span> <span class="s2">"Wed"</span><span class="p">,</span> <span class="s2">"Thu"</span><span class="p">,</span> <span class="s2">"Fri"</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=5b3941b6f3439cbc">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=f4c35f14c8bcec81">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_salary_and_taxes_v1</span><span class="p">(</span>
-    <span class="n">day_of_week_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">salary_per_day</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">employee_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">salaries</span><span class="p">:</span> <span class="nb">list</span>
-<span class="p">):</span>
-    <span class="n">day_of_week</span> <span class="o">=</span> <span class="n">day_of_week_names</span><span class="p">[</span><span class="n">day_of_week_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">days_worked_this_week</span> <span class="o">=</span> <span class="n">day_of_week_index</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">salary_so_far</span> <span class="o">=</span> <span class="n">days_worked_this_week</span> <span class="o">*</span> <span class="n">salary_per_day</span>
-    <span class="n">tax</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">if</span> <span class="n">salary_so_far</span> <span class="o">&gt;</span> <span class="mf">500.0</span> <span class="ow">and</span> <span class="n">salary_so_far</span> <span class="o">&lt;=</span> <span class="mf">1000.0</span><span class="p">:</span>
-        <span class="n">tax</span> <span class="o">=</span> <span class="n">salary_so_far</span> <span class="o">*</span> <span class="mf">0.05</span>
-    <span class="k">elif</span> <span class="n">salary_so_far</span> <span class="o">&gt;</span> <span class="mf">1000.0</span> <span class="ow">and</span> <span class="n">salary_so_far</span> <span class="o">&lt;=</span> <span class="mf">2000.0</span><span class="p">:</span>
-        <span class="n">tax</span> <span class="o">=</span> <span class="n">salary_so_far</span> <span class="o">*</span> <span class="mf">0.1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">tax</span> <span class="o">=</span> <span class="n">salary_so_far</span> <span class="o">*</span> <span class="mf">0.15</span>
-    <span class="n">salary_so_far</span> <span class="o">=</span> <span class="n">salary_so_far</span> <span class="o">-</span> <span class="n">tax</span>
-    <span class="n">salaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">salary_so_far</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">employee_name</span><span class="si">}</span><span class="s2"> worked till </span><span class="si">{</span><span class="n">day_of_week</span><span class="si">}</span><span class="s2"> and earned "</span>
-        <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">salary_so_far</span><span class="si">}</span><span class="s2"> this week."</span>
-    <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Their taxes were $</span><span class="si">{</span><span class="n">tax</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tax</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=f99530d0bac7086d">
+<div class="cell border-box-sizing code_cell rendered celltag_start" id="cell-id=1e38d6b7f6af238e">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">_salaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># @dataclass</span>
+<span class="c1"># class DefaultDemo:</span>
+<span class="c1">#     items: list = field(default=[])</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=1925a45671e1ce7b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=18630d28cea060bc">
 <div class="input">
-<div class="prompt input_prompt">In [20]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">_result</span> <span class="o">=</span> <span class="n">compute_salary_and_taxes_v1</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"Joe"</span><span class="p">,</span> <span class="n">_salaries</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Joe worked till Thu and earned $570.0 this week.
-Their taxes were $30.0.
-30.0
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=676253c03f3d0ba3">
-<div class="input">
-<div class="prompt input_prompt">In [21]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">_salaries</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="mi">570</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">_result</span> <span class="o">==</span> <span class="mi">30</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_slide" id="cell-id=c8240df9151dbece">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=371a6f6c3074bb33">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_salary_and_taxes_v2</span><span class="p">(</span>
-    <span class="n">day_of_week_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">salary_per_day</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">employee_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">salaries</span><span class="p">:</span> <span class="nb">list</span>
-<span class="p">):</span>
-    <span class="n">base_salary</span> <span class="o">=</span> <span class="n">compute_base_salary</span><span class="p">(</span><span class="n">day_of_week_index</span><span class="p">,</span> <span class="n">salary_per_day</span><span class="p">)</span>
-    <span class="n">net_salary</span><span class="p">,</span> <span class="n">tax</span> <span class="o">=</span> <span class="n">compute_net_salary_and_tax</span><span class="p">(</span><span class="n">base_salary</span><span class="p">)</span>
-    <span class="n">store_net_salary</span><span class="p">(</span><span class="n">net_salary</span><span class="p">,</span> <span class="n">salaries</span><span class="p">)</span>
-    <span class="n">print_employee_info</span><span class="p">(</span><span class="n">day_of_week_index</span><span class="p">,</span> <span class="n">employee_name</span><span class="p">,</span> <span class="n">net_salary</span><span class="p">,</span> <span class="n">tax</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tax</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=e5320a394d0ace6c">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=b78bc5d6e82e24a9"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Bei Python Versionen 3.10 und früher funktioniert der Test auf unveränderliche
+Defaults nur für einige Typen aus der Standardbibliothek, nicht für
+benutzerdefinierte Typen:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=20516e1708db0e97">
 <div class="input">
-<div class="prompt input_prompt">In [23]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_base_salary</span><span class="p">(</span><span class="n">day_of_week_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">salary_per_day</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="n">days_worked_this_week</span> <span class="o">=</span> <span class="n">day_of_week_index</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">days_worked_this_week</span> <span class="o">*</span> <span class="n">salary_per_day</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=7c6f4595940abe1d">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fb6b9d5947a4e8e4">
 <div class="input">
-<div class="prompt input_prompt">In [24]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_net_salary_and_tax</span><span class="p">(</span><span class="n">base_salary</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="n">tax</span> <span class="o">=</span> <span class="n">compute_tax</span><span class="p">(</span><span class="n">base_salary</span><span class="p">)</span>
-    <span class="n">net_salary</span> <span class="o">=</span> <span class="n">base_salary</span> <span class="o">-</span> <span class="n">tax</span>
-    <span class="k">return</span> <span class="n">net_salary</span><span class="p">,</span> <span class="n">tax</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=456b1d5d821e2d27">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=dbd8cdcf45721ce3">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_tax</span><span class="p">(</span><span class="n">base_salary</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">base_salary</span> <span class="o">&gt;</span> <span class="mf">500.0</span> <span class="ow">and</span> <span class="n">base_salary</span> <span class="o">&lt;=</span> <span class="mf">1000.0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">base_salary</span> <span class="o">*</span> <span class="mf">0.05</span>
-    <span class="k">elif</span> <span class="n">base_salary</span> <span class="o">&gt;</span> <span class="mf">1000.0</span> <span class="ow">and</span> <span class="n">base_salary</span> <span class="o">&lt;=</span> <span class="mf">2000.0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">base_salary</span> <span class="o">*</span> <span class="mf">0.1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">base_salary</span> <span class="o">*</span> <span class="mf">0.15</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=9f08581e1029e869">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2ed38440f3458dff"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Workshop:-Einkaufsliste">Workshop: Einkaufsliste<a class="anchor-link" href="#Workshop:-Einkaufsliste">¶</a></h1><p>In dieser Aufgabe wollen wir eine Einkaufsliste definieren, die geplante
+Einkäufe verwalten kann. Eine Einkaufsliste soll aus Einträgen bestehen, die
+ein Produkt und die davon benötigte Menge enthalten.</p>
+<p>Es sollen sowohl die Einkaufsliste selber als auch die Einträge durch
+benutzerdefinierte Datentypen repräsentiert werden.</p>
+<p>Falls Sie die Lösung als Python-Projekt statt als Notebook implementieren wollen,
+ist in <code>examples/ShoppingListStarterKit</code> in Projektgerüst, das Sie als
+Startpunkt hernehmen können. In <code>examples/ShoppingList</code> ist ein Lösungsvorschlag.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=92baf440b5d53b8d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Definieren Sie zunächst eine Klasse <code>ShoppingListItem</code>, die folgende Attribute hat:</p>
+<ul>
+<li><code>product: str</code></li>
+<li><code>price: float</code></li>
+<li><code>amount: int</code>
+Verwenden Sie den <code>@dataclass</code> Decorator um die Klasse zu definieren. Verwenden Sie
+einen Default-Wert von 1 für <code>amount</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=882c2af02cf5fceb">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">store_net_salary</span><span class="p">(</span><span class="n">net_salary</span><span class="p">,</span> <span class="n">salaries</span><span class="p">):</span>
-    <span class="n">salaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">net_salary</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=01416c6847ada9aa">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=71e31de2a1ae61a1">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_employee_info</span><span class="p">(</span><span class="n">day_of_week_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tax</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="n">day_of_week</span> <span class="o">=</span> <span class="n">get_day_of_week_from_index</span><span class="p">(</span><span class="n">day_of_week_index</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> worked till </span><span class="si">{</span><span class="n">day_of_week</span><span class="si">}</span><span class="s2"> and earned $</span><span class="si">{</span><span class="n">salary</span><span class="si">}</span><span class="s2"> this week."</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Their taxes were $</span><span class="si">{</span><span class="n">tax</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=166b3502a362cdd7">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=0bef9d38fef484f0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Erzeugen sie ein <code>ShoppingListItem</code>, das 2 Pakete Kaffee zu je Eur 6.99 repräsentiert:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4396ec260891abee">
 <div class="input">
-<div class="prompt input_prompt">In [28]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_day_of_week_from_index</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">day_of_week_names</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=b695e462a4e55095">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=ccb1b78e732d75e2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Erweitern Sie die Klasse <code>ShoppingListItem</code> um eine Methode <code>total_price()</code>,
+die den Gesamtpreis des Eintrags berechnet.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d80d419b1414d4ca">
 <div class="input">
-<div class="prompt input_prompt">In [29]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">_salaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">]</span>
-<span class="n">_result</span> <span class="o">=</span> <span class="n">compute_salary_and_taxes_v2</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"Joe"</span><span class="p">,</span> <span class="n">_salaries</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Joe worked till Thu and earned $570.0 this week.
-Their taxes were $30.0.
-30.0
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_alt" id="cell-id=3e3f020b0bff31f8">
-<div class="input">
-<div class="prompt input_prompt">In [30]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">_salaries</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2345</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="mi">570</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">_result</span> <span class="o">==</span> <span class="mi">30</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6b4e03423667dbb7">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=6b333c22f53b8fc1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Definieren Sie eine Variable <code>mein_kaffee</code>, die ein <code>ShoppingListItem</code>
+repräsentiert, das 2 Pakete Kaffee zu je Eur 6.99 repräsentiert:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e531bbd1721c5238">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=ab8cf6b7e90f7352"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Berechnen Sie den Gesamtpreis von <code>mein_kaffee</code>:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=adf9c2073b23e3b3">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=599e04803faff7a6"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Definieren Sie eine Klasse <code>ShoppingList</code>, die eine Liste von
+<code>ShoppingListItem</code>-Instanzen beinhaltet:</p>
+<ul>
+<li>Verwenden Sie den <code>@dataclass</code> Decorator</li>
+<li>Die Klasse hat ein Attribut <code>items</code> vom Typ <code>list</code>
+(oder <code>list[ShoppingListItem]</code>, falls
+Sie Python 3.9 oder neuer verwenden), das mit einer leeren Liste
+Initialisiert wird.</li>
+<li>Die Methode <code>add_item(self, item: ShoppingListItem)</code> fügt ein
+<code>ShoppingListItem</code> zur Einkaufsliste hinzu.</li>
+<li>Die Methode <code>total_price(self)</code> berechnet den Gesamtpreis der
+Einkaufsliste.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=b30f952dc3a7106a">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8cc8734763092e7c">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=a703d67fb5ce38fd"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Definieren Sie Variable <code>meine_einkaufsliste</code>, die eine Einkaufsliste mit
+folgenden ShoppingListItems repräsentiert:</p>
+<ul>
+<li>2 Pakete Tee à 1.99</li>
+<li>1 Paket Kaffee à 6.99</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a02913cf30cf57b3">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=4a12a1861e66189e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Berechnen Sie den Gesamtpreis von <code>meine_einkaufsliste</code>:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2e17f9f5b5a0e228">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=86ca4a57bc4cc90d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Was ist die Ausgabe von <code>print(meine_einkaufsliste)</code>?</li>
+<li>Was ist die Ausgabe von <code>print(repr(meine_einkaufsliste))</code>?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=546baae06cf31776">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=e6de7c31394ab864"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Erweitern Sie die Klasse <code>ShoppingList</code> um eine
+<a href="https://docs.python.org/3/reference/datamodel.html#object.__str__"><code>__str__()</code>-Methode</a>,
+so dass:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">meine_einkaufsliste</span><span class="p">)</span>
+</pre></div>
+<p>folgende Ausgabe erzeugt:</p>
+<pre><code>Einkaufsliste
+  2 x Tee à 1.99 = 3.98
+  1 x Kaffee à 6.99 = 6.99
+Gesamt: 10.97
+</code></pre>
+<p><em>Hinweis:</em> Sie müssen die Definition von <code>meine_einkaufsliste</code> möglicherweise erneut
+auswerten, nachdem Sie die Klasse <code>ShoppingList</code> erweitert haben, um die Auswirkungen
+Ihrer Änderungen zu sehen.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=7d304143cc82549f">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2f2ace5e208e4596">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=ff1b0439935ff647"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Evaluieren Sie die Definition von <code>meine_einkaufsliste</code> erneut und
+Drucken Sie die Einkaufsliste aus. Entspricht die Ausgabe Ihren Erwartungen?</p>
+<p>Wie sieht die Ausgabe von <code>repr(meine_einkaufsliste)</code> aus?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=25725ac751de0322">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=54256a0e4df51a90">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9a8219b2ebbb5ac1">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=24091af15cbb1ca5"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Erweitern Sie die Klasse <code>ShoppingList</code> um folgende Methoden:</p>
+<ul>
+<li><a href="https://docs.python.org/3/reference/datamodel.html#object.__len__"><code>__len__()</code></a>:
+Gibt die Anzahl der Einträge in der Einkaufsliste zurück.</li>
+<li><a href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__"><code>__getitem__()</code></a>
+Ermöglicht den Zugriff auf Einträge über ihren numerischen Index.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=fc8418ca65de32c1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Bemerkungen">Bemerkungen<a class="anchor-link" href="#Bemerkungen">¶</a></h3><ul>
+<li>Denken Sie daran, dass Sie <code>meine_einkaufsliste</code> neu auswerten müssen.</li>
+<li>Sie können von <code>typing.Sized</code> erben, um statische Typchecks für die
+<code>__len__()</code> Methode zu erleichtern. Das ist aber für das korrekte Laufzeitverhalten
+des Programms nicht notwendig.</li>
+<li>Nachdem <code>ShoppingList</code> sowohl <code>__len__()</code> als auch <code>__getitem__()</code> definiert,
+können Sie auch von <code>typing.Sequence</code> erben.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=9662a5f7962077ea">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5266885e0b15bd09"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Stellen Sie fest, wie lange <code>meine_einkaufsliste</code> ist und
+was ihr erstes und zweites Element sind:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=af969f1277121725">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ead959df187d38cf">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2d265ecfe0dd8c19">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3d5b263dcf67d624">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f16487003fc30ffc"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Was ist der Effekt des folgenden Ausdrucks?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=ace4af269fec4cfd">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">meine_einkaufsliste</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=1d79196a1f20ee8c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Erweitern Sie die Definition der Klasse <code>ShoppingList</code>, so dass der Indexing
+Operator <code>[]</code> auch mit einem String aufgerufen werden kann, und eine Liste mit allen
+Shopping-List-Items zurückgibt, deren <code>product</code> mit dem String übereinstimmt, oder
+eine leere Liste, falls kein solches Item existiert.</p>
+<p>Verifizieren Sie, dass ihre neue Implementierung des Indexing Operators für Integer
+und String Argumente funktioniert.</p>
+<p>Wie bewerten Sie das neue Verhalten der Klasse? Ist es eine gute Idee, den Indexing
+Operator so zu überladen? Gibt es eine bessere Alternative?</p>
+<p><em>Hinweis:</em> Sie können die <code>isinstance()</code> Funktion verwenden um zu überprüfen,
+ob ein Objekt ein String ist.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=be709866fc8fbae9">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=87781d0239f6b189">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=d4f378e881362698"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Fügen Sie 2 Stück Butter (à 1.59) und 1 Laib Brot (7.49) zur Einkaufsliste
+<code>meine_einkaufsliste</code> hinzu.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bf9f7c18456c8fac">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=3611f4bac0801117"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Drucken Sie die Einkaufsliste nochmal aus.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ab62dbae089c47e6">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=3b230734a8335fae"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Was passiert, wenn Sie <code>Butter</code> und <code>Brot</code> nochmals zur Einkaufsliste
+<code>meine_einkaufsliste</code> hinzufügen?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9830cd3e40ddb039">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8c72b1c5cdaebb3a">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=1d8ed3e563fce8c0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Diskussion:</em> Wie könnte das Verhalten der Klasse verbessert werden?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=15bea72191aa3b77">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
