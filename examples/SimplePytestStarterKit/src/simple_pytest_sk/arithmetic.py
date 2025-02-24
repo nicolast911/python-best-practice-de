@@ -18,6 +18,9 @@ def negate(x):
 def my_abs(x):
     """Return the absolute value of x."""
     if x <= 0:
-        return x
-    else:
         return -x
+    else:
+        return x
+
+print(my_abs(2))
+print(my_abs(-2))
