@@ -42,5 +42,3 @@ class TestMyAbs:
 
     def test_zero(self):
         assert my_abs(0) == 0
-
-    

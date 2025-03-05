@@ -28,7 +28,8 @@ class ShoppingList:
         return result
 
     def __len__(self):
-        """Return the number of items in a shopping list."""
+        """Return the number of items in a shopping list.
+        """
         return len(self.items)
 
     def __getitem__(self, n):
